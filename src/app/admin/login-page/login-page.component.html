@@ -1,0 +1,35 @@
+<form 
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
+
+  <h2>Login as administrator</h2>
+
+  <div class="form-control">
+    <label for="email">Email</label>
+    <input type="email" formControlName='email' id="email">
+    <div *ngIf="form.controls['email'].touched && form.controls['email'].invalid" class="validation">
+      <small *ngIf="form.controls['email'].errors?.required">Enter Email.</small>
+      <small *ngIf="form.controls['email'].errors?.email">Enter valid Email.</small>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="password">Email</label>
+    <input type="password" formControlName='password' id="password">
+    <div *ngIf="form.controls['password'].touched && form.controls['password'].invalid" class="validation">
+      <small *ngIf="form.controls['password'].errors?.required">Enter password.</small>
+      <small *ngIf="form.controls['password'].errors?.minlength">
+        Password must be at least {{form.controls['password'].errors?.minlength.requiredLength}} characters.
+        Now he {{form.controls['password'].errors?.minlength.actualLength}}
+      </small>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block"
+    [disabled]="form.invalid || submited"
+  >
+    Logon
+</button>
+
+</form>
