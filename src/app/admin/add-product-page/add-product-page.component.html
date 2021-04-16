@@ -1,1 +1,68 @@
-<p>add-product-page works!</p>
+<form 
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
+
+  <h2>Add product</h2>
+
+  <div class="form-control">
+    <label for="type">Type:</label>
+    <select formControlName="type" id="type">
+      <option value="phone">Phone</option>
+      <option value="tablet">Tablet</option>
+      <option value="laptop">Laptop</option>
+    </select>
+    <!-- <input type="type" formControlName='type' id="type">
+    <div *ngIf="form.controls['type'].touched && form.controls['type'].invalid" class="validation">
+      <small *ngIf="form.controls['type'].errors?.required">Chose prodect type</small>
+      <small *ngIf="form.controls['type'].errors?.email">Enter valid Email.</small>
+    </div> -->
+  </div>
+
+  <div class="form-control">
+    <label for="title">Name:</label>
+    <input type="title" formControlName='title' id="title">
+    <div *ngIf="form.controls['title'].touched && form.controls['title'].invalid" class="validation">
+      <small *ngIf="form.controls['title'].errors?.required">Chose prodect name</small>
+      <!-- <small *ngIf="form.controls['type'].errors?.email">Enter valid Email.</small> -->
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="photo">Photo:</label>
+    <quill-editor formControlName="photo"></quill-editor>
+    <!-- <input type="photo" formControlName='photo' id="photo"> -->
+    <!-- <div *ngIf="form.controls['photo'].touched && form.controls['photo'].invalid" class="validation">
+      <small *ngIf="form.controls['photo'].errors?.required">Chose prodect type</small>
+      <small *ngIf="form.controls['type'].errors?.email">Enter valid Email.</small>
+    </div> -->
+  </div>
+
+  <div class="form-control">
+    <label for="info">Information:</label>
+    <quill-editor formControlName="info"></quill-editor>
+    <!-- <input type="info" formControlName='info' id="info">
+    <div *ngIf="form.controls['info'].touched && form.controls['info'].invalid" class="validation">
+      <small *ngIf="form.controls['info'].errors?.required">Chose prodect type</small>
+      <small *ngIf="form.controls['type'].errors?.email">Enter valid Email.</small>
+    </div> -->
+  </div>
+
+  <div class="form-control">
+    <label for="price">Price:</label>
+    <input type="price" formControlName='price' id="price">
+    <div *ngIf="form.controls['price'].touched && form.controls['price'].invalid" class="validation">
+      <small *ngIf="form.controls['price'].errors?.required">Chose prodect price</small>
+      <!-- <small *ngIf="form.controls['type'].errors?.email">Enter valid Email.</small> -->
+    </div>
+  </div>
+
+  
+
+  <button type="submit" class="btn btn-primary btn-block"
+    [disabled]="form.invalid || submited"
+  >
+    Add
+</button>
+
+</form>
