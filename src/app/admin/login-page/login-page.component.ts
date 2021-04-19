@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
+import { User } from 'src/app/shared/interface';
 
 @Component({
   selector: 'app-login-page',
@@ -28,13 +29,13 @@ export class LoginPageComponent implements OnInit {
     if (this.form.invalid) return;
     this.submited = true;
 
-    const user = {
+    const user: User = {
       email: this.form.value.email,
       password: this.form.value.password,
       returnSecureToken: true
     }
 
-    this.auth.login(user).subscribe(res => {
+    this.auth.login(user).subscribe(() => {
       this.form.reset;
       this.router.navigate(['/admin', 'dashboard']);
       this.submited = false;

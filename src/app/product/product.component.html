@@ -1,0 +1,36 @@
+<div class="text-center dashboard"
+  *ngIf="products!.length; else noProducts">
+
+  <div class="box"
+    *ngFor="let product of products"
+  >
+    <h2>{{product.title}}</h2>
+  
+    <div >
+      <quill-view-html [content]="product.photo"></quill-view-html>
+    </div>
+  
+    <h2>Price: {{product.price}}$</h2>
+
+    <button class="btn btn-dark"
+      [routerLink]="['/product', product.id]"
+    >
+      Open
+    </button>
+
+    <button class="btn btn-dark"
+      [routerLink]="['/cart']"
+    >Add to cart</button>
+  </div>
+</div>
+
+
+
+
+
+<ng-template #noProducts>
+  <div>
+    Товаров не найдено!
+  </div>
+</ng-template>
+

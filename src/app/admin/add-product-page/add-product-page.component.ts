@@ -1,6 +1,7 @@
 import { ProductService } from './../../shared/product.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/shared/interface';
 
 @Component({
   selector: 'app-add-product-page',
@@ -28,7 +29,7 @@ export class AddProductPageComponent implements OnInit {
   submit = (): void => {
     if(this.form.invalid) return;
 
-    const product = {
+    const product: Product = {
       type: this.form.value.type,
       title: this.form.value.title,
       photo: this.form.value.photo,
@@ -37,10 +38,9 @@ export class AddProductPageComponent implements OnInit {
       date: new Date()
     };
     
-    this.productService.createProduct(product).subscribe(res => console.log(res)
-    );
+    this.productService.createProduct(product).subscribe(res => console.log(res));
 
-    console.log(product);
+    
     
   }
 

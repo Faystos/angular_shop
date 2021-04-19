@@ -1,1 +1,19 @@
-<p>main-page works!</p>
+<div
+  *ngIf="products$ | async as products; else loader"  
+>
+  <app-product    
+    [products]="products">    
+  </app-product>
+</div>
+
+<ng-template #loader>
+  <div>
+    loading...
+  </div>
+</ng-template>
+
+
+
+
+<!-- *ngFor="let product of products" -->
+
