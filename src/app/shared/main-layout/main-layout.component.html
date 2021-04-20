@@ -2,15 +2,15 @@
   <h2>NG Shop</h2>
   <ul>
     <li routerLinkActive="active">
-      <a href="#">Phone</a>
+      <a (click)="setType($event, 'Phone')">Phone</a>
     </li>
 
     <li routerLinkActive="active">
-      <a href="#">Tablet</a>
+      <a (click)="setType($event, 'Tablet')">Tablet</a>
     </li>
 
     <li routerLinkActive="active">
-      <a href="#">Laptop</a>
+      <a (click)="setType($event, 'Laptop')">Laptop</a>
     </li>
 
     <li routerLinkActive="active">

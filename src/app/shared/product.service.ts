@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
+  type: string = 'Phone';
 
   constructor(
     private http: HttpClient,
@@ -57,4 +58,8 @@ export class ProductService {
   removeProduct = (id: string): Observable<void> => this.http.delete<void>(`${environment.fbDbUrl}/products/${id}.json`);
 
   updateProduct = (product: Product): Observable<Product> => this.http.patch<Product>(`${environment.fbDbUrl}/products/${product.id}.json`, product);
+
+  setType = (type: string): void => {
+    this.type = type;
+  } 
 }

@@ -14,7 +14,7 @@ export class MainPageComponent implements OnInit {
 
 
   constructor(
-    private productService: ProductService,    
+    public productService: ProductService,    
   ) { }
 
   ngOnInit() {

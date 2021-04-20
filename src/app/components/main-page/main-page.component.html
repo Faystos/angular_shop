@@ -2,7 +2,7 @@
   *ngIf="products$ | async as products; else loader"  
 >
   <app-product    
-    [products]="products">    
+    [products]="products | sorting: productService.type">    
   </app-product>
 </div>
 
@@ -11,9 +11,3 @@
     loading...
   </div>
 </ng-template>
-
-
-
-
-<!-- *ngFor="let product of products" -->
-

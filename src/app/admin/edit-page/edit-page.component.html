@@ -1,6 +1,8 @@
-<form 
-  [formGroup]="form"
-  (ngSubmit)="submit()"
+<div class="container" *ngIf="editForm; else loader">
+
+  <form 
+  [formGroup]="editForm"
+  (ngSubmit)="submit($event)"
 >
 
   <h2>Edit product</h2>
@@ -17,8 +19,8 @@
   <div class="form-control">
     <label for="title">Name:</label>
     <input type="title" formControlName='title' id="title">
-    <div *ngIf="form.controls['title'].touched && form.controls['title'].invalid" class="validation">
-      <small *ngIf="form.controls['title'].errors?.required">Chose prodect name</small>      
+    <div *ngIf="editForm.controls['title'].touched && editForm.controls['title'].invalid" class="validation">
+      <small *ngIf="editForm.controls['title'].errors?.required">Chose prodect name</small>      
     </div>
   </div>
 
@@ -35,17 +37,26 @@
   <div class="form-control">
     <label for="price">Price:</label>
     <input type="price" formControlName='price' id="price">
-    <div *ngIf="form.controls['price'].touched && form.controls['price'].invalid" class="validation">
-      <small *ngIf="form.controls['price'].errors?.required">Chose prodect price</small>     
+    <div *ngIf="editForm.controls['price'].touched && editForm.controls['price'].invalid" class="validation">
+      <small *ngIf="editForm.controls['price'].errors?.required">Chose prodect price</small>     
     </div>
-  </div>
-
-  
+  </div>  
 
   <button type="submit" class="btn btn-primary btn-block"
-    [disabled]="form.invalid || submited"
+    [disabled]="editForm.invalid || submited"
   >
-    Add
+    Edit
 </button>
 
 </form>
+
+</div>
+
+
+
+<ng-template #loader>
+  <div class="text-center">
+    Loading...
+  </div>
+</ng-template>
+
