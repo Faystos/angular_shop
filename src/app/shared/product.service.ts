@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
   type: string = 'Phone';
+  cartProducts: Product[] = JSON.parse(localStorage.getItem('cart-product')) || [];
 
   constructor(
     private http: HttpClient,
@@ -61,5 +62,17 @@ export class ProductService {
 
   setType = (type: string): void => {
     this.type = type;
-  } 
+  }
+  
+  addCartProduct = (product: Product): void => {
+    const newCartProducts: Product[] = [product, ...this.cartProducts];
+    this.cartProducts = newCartProducts;
+    localStorage.setItem('cart-product', JSON.stringify(this.cartProducts));
+  }
+
+  deleteCartProduct = (idProduct: string):void => {
+    const newCartProducts: Product[] = this.cartProducts.filter(({id}) => id !== idProduct);
+    this.cartProducts = newCartProducts;
+    localStorage.setItem('cart-product', JSON.stringify(this.cartProducts));    
+  }
 }
