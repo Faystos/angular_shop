@@ -1,3 +1,4 @@
+import { Product } from 'src/app/shared/interface';
 export interface FbResponse {
   name: string
 }
@@ -22,4 +23,14 @@ export interface Product {
   photo: string,
   info: string,
   price: string,
+}
+
+export interface Order {
+  name: string,
+  phone: string,
+  address: string,
+  payment: string,
+  order: Product[],
+  id?:string,
+  date?: Date
 }

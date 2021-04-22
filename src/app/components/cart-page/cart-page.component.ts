@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { OrderService } from './../../shared/order.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -18,6 +20,8 @@ export class CartPageComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private orderService: OrderService,
+    private router: Router,
   ) { }
 
   ngOnInit() {    
@@ -27,7 +31,7 @@ export class CartPageComponent implements OnInit {
       name: new FormControl(null, Validators.required),
       phone: new FormControl(null, [Validators.required]),
       address: new FormControl(null, Validators.required),
-      payment: new FormControl(null, Validators.required)
+      payment: new FormControl('Cash')
     });
   }
 
@@ -48,10 +52,23 @@ export class CartPageComponent implements OnInit {
   submit = (evt: Event): void => {
     evt.preventDefault();
     if(this.formDelivery.invalid) return;
+    this.submited = true
 
     const order = {
       name: this.formDelivery.value.name,
+      phone: this.formDelivery.value.phone,
+      address: this.formDelivery.value.address,
+      payment: this.formDelivery.value.payment,
+      order: this.productService.cartProducts,
     }
+
+    this.orderService.createOrder(order).subscribe(() => {
+      this.formDelivery.reset();
+      this.submited = false;
+      localStorage.setItem('cart-product', JSON.stringify({}));  
+    });
+
+
 
     console.log(order);
   }
