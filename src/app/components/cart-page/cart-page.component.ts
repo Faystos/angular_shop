@@ -24,8 +24,8 @@ export class CartPageComponent implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit() {    
-    this.calculateCartProduct();  
+  ngOnInit() {
+    this.calculateCartProduct();
 
     this.formDelivery = new FormGroup({
       name: new FormControl(null, Validators.required),
@@ -38,13 +38,13 @@ export class CartPageComponent implements OnInit {
 
   deletProduct = (id: string): void => {
     this.productService.deleteCartProduct(id);
-    this.calculateCartProduct();    
+    this.calculateCartProduct();
   }
 
-  private calculateCartProduct = (): void => {    
+  private calculateCartProduct = (): void => {
     this.cartProducts = this.productService.cartProducts;
     this.totalPrice = 0;
-    this.cartProducts.forEach(({ price }) => {      
+    this.cartProducts.forEach(({ price }) => {
       this.totalPrice += parseInt(price);
     });
   }
@@ -65,7 +65,8 @@ export class CartPageComponent implements OnInit {
     this.orderService.createOrder(order).subscribe(() => {
       this.formDelivery.reset();
       this.submited = false;
-      localStorage.setItem('cart-product', JSON.stringify({}));  
+      this.cartProducts = [];
+      localStorage.setItem('cart-product', JSON.stringify(this.cartProducts));
     });
 
 
