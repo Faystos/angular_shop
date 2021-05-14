@@ -1,4 +1,4 @@
-import { Product } from 'src/app/shared/interface';
+
 export interface FbResponse {
   name: string
 }

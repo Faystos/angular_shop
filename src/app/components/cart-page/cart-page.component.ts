@@ -35,7 +35,6 @@ export class CartPageComponent implements OnInit {
     });
   }
 
-
   deletProduct = (id: string): void => {
     this.productService.deleteCartProduct(id);
     this.calculateCartProduct();
@@ -67,14 +66,6 @@ export class CartPageComponent implements OnInit {
       this.submited = false;
       this.cartProducts = [];
       localStorage.setItem('cart-product', JSON.stringify(this.cartProducts));
-    });
-
-
-
-    console.log(order);
+    });    
   }
 }
-
-// Validators.pattern("^[0-9]*$")
-
-

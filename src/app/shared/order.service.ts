@@ -27,4 +27,20 @@ export class OrderService {
       })
     );
   }
+
+  getAllOrder = ():Observable<Order[]> => {
+    return this.http.get(`${environment.fbDbUrl}/orders.json`)
+      .pipe(
+        map(res => {
+          return Object.keys(res)
+            .map(key => ({
+              ...res[key],
+              id: key,
+              date: new Date(res[key].date)
+            }))
+        }),
+      )
+  }
+
+  deleteOrder = (id: string): Observable<void> => this.http.delete<void>(`${environment.fbDbUrl}/orders/${id}.json`)
 }
