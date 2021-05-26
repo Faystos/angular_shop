@@ -32,15 +32,21 @@ export class OrderService {
     return this.http.get(`${environment.fbDbUrl}/orders.json`)
       .pipe(
         map(res => {
-          return Object.keys(res)
+          if (res !== null) {
+            return Object.keys(res)
             .map(key => ({
               ...res[key],
               id: key,
               date: new Date(res[key].date)
             }))
+          } else {
+            return [];
+          }          
         }),
       )
   }
 
   deleteOrder = (id: string): Observable<void> => this.http.delete<void>(`${environment.fbDbUrl}/orders/${id}.json`)
+
+  updateOrder = (order: Order): Observable<Order> => this.http.patch<Order>(`${environment.fbDbUrl}/orders/${order.id}.json`, order);
 }

@@ -14,6 +14,7 @@ import { ProductComponent } from './product/product.component';
 import { SortingPipe } from './shared/sorting.pipe';
 import { SharedModule } from './shared/shared.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { SharedModule } from './shared/shared.module';
     ProductPageComponent,
     CartPageComponent,
     ProductComponent,
-    SortingPipe,        
+    SortingPipe,
+     
   ],
   imports: [
     SharedModule,

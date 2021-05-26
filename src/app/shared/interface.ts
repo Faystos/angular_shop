@@ -32,5 +32,7 @@ export interface Order {
   payment: string,
   order: Product[],
   id?:string,
-  date?: Date
+  date?: Date,
+  done: boolean,
+  totalPrice: number
 }

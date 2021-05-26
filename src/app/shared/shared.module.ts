@@ -3,10 +3,13 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
 import { AuthService } from './auth.service';
+import { LoaderComponent } from '../components/loader/loader.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LoaderComponent,       
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -17,7 +20,8 @@ import { AuthService } from './auth.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    QuillModule
+    QuillModule,
+    LoaderComponent,      
   ],
   providers: [
     AuthService
