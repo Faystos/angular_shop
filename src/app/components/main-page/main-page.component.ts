@@ -9,16 +9,13 @@ import { ProductService } from 'src/app/shared/product.service';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
-
   products$: Observable<Product[]>;
 
-
   constructor(
-    public productService: ProductService,    
+    public productService: ProductService,
   ) { }
 
   ngOnInit() {
     this.products$ = this.productService.getAllProduct();
   }
-
 }

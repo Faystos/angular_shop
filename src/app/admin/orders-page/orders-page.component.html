@@ -9,8 +9,6 @@
     <button class="btn btn-primary" type="button" data-value="done">done</button>
   </div>
 
- 
-
   <table>
     <tHead>
       <tr>
@@ -24,8 +22,7 @@
       </tr>
     </tHead>
     <tbody
-      
-      *ngIf="orders!.length; else empty"  
+      *ngIf="orders!.length; else empty"
     >
       <tr *ngFor="let order of orders">
         <td>{{order.date | date: 'dd.MM.yyyy' }}</td>

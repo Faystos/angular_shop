@@ -11,7 +11,6 @@ import { ProductPageComponent } from './components/product-page/product-page.com
 import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { AuthInterceptor } from './shared/auth.interseptor';
 import { ProductComponent } from './product/product.component';
-import { SortingPipe } from './shared/sorting.pipe';
 import { SharedModule } from './shared/shared.module';
 
 
@@ -23,8 +22,6 @@ import { SharedModule } from './shared/shared.module';
     ProductPageComponent,
     CartPageComponent,
     ProductComponent,
-    SortingPipe,
-     
   ],
   imports: [
     SharedModule,

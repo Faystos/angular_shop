@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from "@angular/common";
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
 import { AuthService } from './auth.service';
 import { LoaderComponent } from '../components/loader/loader.component';
+import {SortingPipe} from './sorting.pipe';
 
 
 @NgModule({
   declarations: [
-    LoaderComponent,       
+    LoaderComponent,
+    SortingPipe,
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { LoaderComponent } from '../components/loader/loader.component';
     FormsModule,
     ReactiveFormsModule,
     QuillModule,
-    LoaderComponent,      
+    LoaderComponent,
+    SortingPipe
   ],
   providers: [
     AuthService

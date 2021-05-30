@@ -15,28 +15,28 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
   oSub: Subscription;
   rSub: Subscription;
   uSub: Subscription;
-  loading: boolean = false;
+  loading = false;
 
   constructor(
     private orderService: OrderService
   ) { }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.oSub = this.orderService.getAllOrder().subscribe(orders => {
       this.orders = orders;
       this.loading = true;
-    });    
-  }  
+    });
+  }
 
   complitedOrder = (evt: Event, order: Order): void => {
-    evt.preventDefault();    
+    evt.preventDefault();
     this.uSub = this.orderService.updateOrder({
       ...order,
       done: true
     }).subscribe( () => {
         this.orders = this.orders.map(item => {
-          if (item.id === order.id) item.done = true; 
-          return item
+          if (item.id === order.id) item.done = true;
+          return item;
         });
     });
   }
@@ -53,10 +53,4 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
     if (this.rSub) this.rSub.unsubscribe();
     if (this.uSub) this.uSub.unsubscribe();
   }
-
-  handlerLoading = () => {
-    if (this.loading) return true;
-    if (!this.orders.length && !this.loading) return false;
-  }
-
 }
