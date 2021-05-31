@@ -1,8 +1,8 @@
 <div
-  *ngIf="products$ | async as products; else loader"  
+  *ngIf="products$ | async as products; else loader"
 >
-  <app-product    
-    [products]="products | sorting: productService.type">    
+  <app-product
+    [products]="products | sorting: productService.type: 'type'">
   </app-product>
 </div>
 

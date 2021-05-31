@@ -6,7 +6,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class SortingPipe implements PipeTransform {
-  transform <Obj extends {[key: string]: string}>(arr: Obj[], type: string): Obj[] {
-    return arr.filter(el => el.type === type);
+  transform <Obj extends {[key: string]: string}>(arr: Obj[], type: string, keySort: string): Obj[] {
+    if (type === 'all') {
+      return arr;
+    }
+    return arr.filter(el => {
+      return el[keySort] === type;
+    });
   }
 }

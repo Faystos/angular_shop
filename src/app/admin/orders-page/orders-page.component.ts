@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { Order } from './../../shared/interface';
 import { OrderService } from './../../shared/order.service';
+import {Event} from '@angular/router';
 
 @Component({
   selector: 'app-orders-page',
@@ -16,6 +17,8 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
   rSub: Subscription;
   uSub: Subscription;
   loading = false;
+  filterTextOrders: boolean | string = 'all';
+  isActive = false;
 
   constructor(
     private orderService: OrderService
@@ -28,7 +31,7 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  complitedOrder = (evt: Event, order: Order): void => {
+  complitedOrder = (evt: MouseEvent, order: Order): void => {
     evt.preventDefault();
     this.uSub = this.orderService.updateOrder({
       ...order,
@@ -41,7 +44,7 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  deletedOrder = (evt: Event, orderId: string): void => {
+  deletedOrder = (evt: MouseEvent, orderId: string): void => {
     evt.preventDefault();
     this.rSub = this.orderService.deleteOrder(orderId).subscribe(() => {
       this.orders = this.orders.filter(item => item.id !== orderId);
@@ -52,5 +55,26 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
     if (this.oSub) this.oSub.unsubscribe();
     if (this.rSub) this.rSub.unsubscribe();
     if (this.uSub) this.uSub.unsubscribe();
+  }
+
+  handlerButtonFilterOrder = (evt: MouseEvent): void => {
+    evt.preventDefault();
+    console.log(evt.target);
+    this.isActive = !this.isActive;
+    if (!(evt.target instanceof HTMLButtonElement)) {
+      return;
+    }
+
+    this.filteringOrders(evt.target.dataset.value);
+  }
+
+  filteringOrders = (curentFilter: string): void => {
+    if (curentFilter === 'active') {
+      this.filterTextOrders = false;
+    } else if (curentFilter === 'done') {
+      this.filterTextOrders = true;
+    } else if (curentFilter === 'all') {
+      this.filterTextOrders = curentFilter;
+    }
   }
 }
