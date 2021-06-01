@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
   constructor(
@@ -21,20 +22,19 @@ export class AuthService {
     );
   }
 
-  private setToken = (response: ResponseUser) => {    
-    if(response) {
-      const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000)
+  private setToken = (response: ResponseUser) => {
+    if (response) {
+      const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
       localStorage.setItem('fb-token-exp', expDate.toString());
       localStorage.setItem('fb-token', response.idToken);
     } else {
       localStorage.clear();
     }
-    
   }
 
   get token() {
     const expDate = new Date(localStorage.getItem('fb-token-exp'));
-    if (new Date > new Date(expDate)) {
+    if (new Date() > new Date(expDate)) {
       this.logout();
       return null;
     }
@@ -46,6 +46,6 @@ export class AuthService {
   }
 
   isAuthenicated() {
-    return !!this.token; 
+    return !!this.token;
   }
 }

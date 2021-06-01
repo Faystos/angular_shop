@@ -1,58 +1,53 @@
 <div class="container" *ngIf="editForm; else loader">
 
-  <form 
+  <form
   [formGroup]="editForm"
   (ngSubmit)="submit($event)"
 >
-
   <h2>Edit product</h2>
 
-  <div class="form-control">
-    <label for="type">Type:</label>
-    <select formControlName="type" id="type">
-      <option value="Phone">Phone</option>
-      <option value="Tablet">Tablet</option>
-      <option value="Laptop">Laptop</option>
-    </select>   
-  </div>
-
-  <div class="form-control">
-    <label for="title">Name:</label>
-    <input type="title" formControlName='title' id="title">
-    <div *ngIf="editForm.controls['title'].touched && editForm.controls['title'].invalid" class="validation">
-      <small *ngIf="editForm.controls['title'].errors?.required">Chose prodect name</small>      
+    <div class="form-control">
+      <label for="type">Type:</label>
+      <select formControlName="type" id="type">
+        <option value="Phone">Phone</option>
+        <option value="Tablet">Tablet</option>
+        <option value="Laptop">Laptop</option>
+      </select>
     </div>
-  </div>
 
-  <div class="form-control">
-    <label for="photo">Photo:</label>
-    <quill-editor formControlName="photo"></quill-editor>    
-  </div>
-
-  <div class="form-control">
-    <label for="info">Information:</label>
-    <quill-editor formControlName="info"></quill-editor>  
-  </div>
-
-  <div class="form-control">
-    <label for="price">Price:</label>
-    <input type="price" formControlName='price' id="price">
-    <div *ngIf="editForm.controls['price'].touched && editForm.controls['price'].invalid" class="validation">
-      <small *ngIf="editForm.controls['price'].errors?.required">Chose prodect price</small>     
+    <div class="form-control">
+      <label for="title">Name:</label>
+      <input type="text" formControlName='title' id="title">
+      <div *ngIf="editForm.controls['title'].touched && editForm.controls['title'].invalid" class="validation">
+        <small *ngIf="editForm.controls['title'].errors?.required">Chose protect name</small>
+      </div>
     </div>
-  </div>  
 
-  <button type="submit" class="btn btn-primary btn-block"
-    [disabled]="editForm.invalid || submited"
-  >
-    Edit
-</button>
+    <div class="form-control">
+      <label>Photo:</label>
+      <quill-editor formControlName="photo"></quill-editor>
+    </div>
 
-</form>
+    <div class="form-control">
+      <label>Information:</label>
+      <quill-editor formControlName="info"></quill-editor>
+    </div>
 
+    <div class="form-control">
+      <label for="price">Price:</label>
+      <input type="number" formControlName='price' id="price">
+      <div *ngIf="editForm.controls['price'].touched && editForm.controls['price'].invalid" class="validation">
+        <small *ngIf="editForm.controls['price'].errors?.required">Chose protect price</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block"
+      [disabled]="editForm.invalid || submitted"
+    >
+      Edit
+    </button>
+  </form>
 </div>
-
-
 
 <ng-template #loader>
   <div class="text-center">

@@ -11,7 +11,7 @@ import { User } from 'src/app/shared/interface';
 })
 export class LoginPageComponent implements OnInit {
   form: FormGroup;
-  submited = false; 
+  submitted = false;
 
   constructor(
     public auth: AuthService,
@@ -21,27 +21,29 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(6)]), 
+      password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
     });
   }
 
   submit = () => {
-    if (this.form.invalid) return;
-    this.submited = true;
+    if (this.form.invalid) {
+      return;
+    }
+    this.submitted = true;
 
     const user: User = {
       email: this.form.value.email,
       password: this.form.value.password,
       returnSecureToken: true
-    }
+    };
 
     this.auth.login(user).subscribe(() => {
-      this.form.reset;
+      this.form.reset();
       this.router.navigate(['/admin', 'dashboard']);
-      this.submited = false;
+      this.submitted = false;
     }, () => {
-      this.submited = false;
-    })
+      this.submitted = false;
+    });
   }
 
 }

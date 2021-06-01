@@ -10,6 +10,7 @@ import { switchMap } from 'rxjs/operators';
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.scss']
 })
+
 export class ProductPageComponent implements OnInit {
   product$: Observable<Product>;
 
@@ -20,12 +21,11 @@ export class ProductPageComponent implements OnInit {
 
   ngOnInit() {
     this.product$ = this.route.params.pipe(
-      switchMap(params => this.produstService.getProduct(params['id'])),
-    )
+      switchMap(params => this.produstService.getProduct(params.id)),
+    );
   }
 
   addProduct = (product: Product): void => {
-    this,this.produstService.addCartProduct(product);
+    this.produstService.addCartProduct(product);
   }
-
 }

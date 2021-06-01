@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { Order } from './../../shared/interface';
-import { OrderService } from './../../shared/order.service';
-import {Event} from '@angular/router';
+import { Order } from '../../shared/interface';
+import { OrderService } from '../../shared/order.service';
 
 @Component({
   selector: 'app-orders-page',
@@ -11,34 +10,36 @@ import {Event} from '@angular/router';
   styleUrls: ['./orders-page.component.scss']
 })
 export class OrdersPageComponent implements OnInit, OnDestroy {
-
   orders: Order[] = [];
   oSub: Subscription;
   rSub: Subscription;
   uSub: Subscription;
   loading = false;
   filterTextOrders: boolean | string = 'all';
-  isActive = false;
+  activeButton = 'all';
 
   constructor(
     private orderService: OrderService
   ) { }
 
-  ngOnInit() {
-    this.oSub = this.orderService.getAllOrder().subscribe(orders => {
-      this.orders = orders;
+  ngOnInit(): void {
+    this.oSub = this.orderService.getAllOrder().subscribe(resOrders => {
+      this.orders = resOrders;
+      this.isActive(this.activeButton);
       this.loading = true;
     });
   }
 
-  complitedOrder = (evt: MouseEvent, order: Order): void => {
+  completedOrder = (evt: MouseEvent, order: Order): void => {
     evt.preventDefault();
     this.uSub = this.orderService.updateOrder({
       ...order,
       done: true
     }).subscribe( () => {
         this.orders = this.orders.map(item => {
-          if (item.id === order.id) item.done = true;
+          if (item.id === order.id) {
+            item.done = true;
+          }
           return item;
         });
     });
@@ -51,30 +52,36 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    if (this.oSub) this.oSub.unsubscribe();
-    if (this.rSub) this.rSub.unsubscribe();
-    if (this.uSub) this.uSub.unsubscribe();
+  ngOnDestroy(): void {
+    if (this.oSub) {
+      this.oSub.unsubscribe();
+    }
+    if (this.rSub) {
+      this.rSub.unsubscribe();
+    }
+    if (this.uSub) {
+      this.uSub.unsubscribe();
+    }
   }
 
   handlerButtonFilterOrder = (evt: MouseEvent): void => {
     evt.preventDefault();
-    console.log(evt.target);
-    this.isActive = !this.isActive;
     if (!(evt.target instanceof HTMLButtonElement)) {
       return;
     }
-
-    this.filteringOrders(evt.target.dataset.value);
+    this.activeButton = evt.target.dataset.value;
+    this.filteringOrders(this.activeButton);
   }
 
-  filteringOrders = (curentFilter: string): void => {
-    if (curentFilter === 'active') {
+  filteringOrders = (currentFilter: string): void => {
+    if (currentFilter === 'active') {
       this.filterTextOrders = false;
-    } else if (curentFilter === 'done') {
+    } else if (currentFilter === 'done') {
       this.filterTextOrders = true;
-    } else if (curentFilter === 'all') {
-      this.filterTextOrders = curentFilter;
+    } else if (currentFilter === 'all') {
+      this.filterTextOrders = currentFilter;
     }
   }
+
+  isActive = (buttonName: string): boolean => this.activeButton === buttonName;
 }

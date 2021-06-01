@@ -1,10 +1,10 @@
 import { Router } from '@angular/router';
-import { OrderService } from './../../shared/order.service';
+import { OrderService } from '../../shared/order.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { Product } from './../../shared/interface';
-import { ProductService } from './../../shared/product.service';
+import { Product } from '../../shared/interface';
+import { ProductService } from '../../shared/product.service';
 
 
 @Component({
@@ -15,7 +15,7 @@ import { ProductService } from './../../shared/product.service';
 export class CartPageComponent implements OnInit {
   cartProducts: Product[] = [];
   totalPrice: number;
-  submited: boolean = false;
+  submitted = false;
   formDelivery: FormGroup;
 
   constructor(
@@ -44,14 +44,16 @@ export class CartPageComponent implements OnInit {
     this.cartProducts = this.productService.cartProducts;
     this.totalPrice = 0;
     this.cartProducts.forEach(({ price }) => {
-      this.totalPrice += parseInt(price);
+      this.totalPrice += parseInt(price, 10);
     });
   }
 
   submit = (evt: Event): void => {
     evt.preventDefault();
-    if(this.formDelivery.invalid) return;
-    this.submited = true
+    if (this.formDelivery.invalid) {
+      return;
+    }
+    this.submitted = true;
 
     const order = {
       name: this.formDelivery.value.name,
@@ -62,14 +64,13 @@ export class CartPageComponent implements OnInit {
       date: new Date(),
       done: false,
       totalPrice: this.totalPrice
-
-    }
+    };
 
     this.orderService.createOrder(order).subscribe(() => {
       this.formDelivery.reset();
-      this.submited = false;
+      this.submitted = false;
       this.cartProducts = [];
       localStorage.setItem('cart-product', JSON.stringify(this.cartProducts));
-    });    
+    });
   }
 }

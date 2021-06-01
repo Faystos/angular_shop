@@ -7,7 +7,7 @@
       <tr>
         <th>Type product</th>
         <th>Name product</th>
-        <th>Price prodict</th>
+        <th>Price product</th>
         <th>Deleted</th>
       </tr>
     </thead>
@@ -23,36 +23,36 @@
   <div class="line"></div>
   <b class="right">Total price: {{totalPrice}}$</b>
 
-  
 
-  <form 
+
+  <form
   [formGroup]="formDelivery"
   (ngSubmit)="submit($event)"
 >
 
-  <h2 class="text-center">Delivery:</h2>  
+  <h2 class="text-center">Delivery:</h2>
 
   <div class="form-control">
     <label for="name">Name:</label>
-    <input type="name" formControlName='name' id="name">
+    <input type="text" formControlName='name' id="name">
     <div *ngIf="formDelivery.controls['name'].touched && formDelivery.controls['name'].invalid" class="validation">
-      <small *ngIf="formDelivery.controls['name'].errors?.required">Enter your name</small>      
+      <small *ngIf="formDelivery.controls['name'].errors?.required">Enter your name</small>
     </div>
   </div>
 
   <div class="form-control">
     <label for="phone">Phone:</label>
-    <input type="phone" formControlName='phone' id="phone">
+    <input type="number" formControlName='phone' id="phone">
     <div *ngIf="formDelivery.controls['phone'].touched && formDelivery.controls['phone'].invalid" class="validation">
-      <small *ngIf="formDelivery.controls['phone'].errors?.required">Enter your phone</small>      
+      <small *ngIf="formDelivery.controls['phone'].errors?.required">Enter your phone</small>
     </div>
   </div>
 
   <div class="form-control">
     <label for="address">Address:</label>
-    <input type="address" formControlName='address' id="address">
+    <input type="text" formControlName='address' id="address">
     <div *ngIf="formDelivery.controls['address'].touched && formDelivery.controls['address'].invalid" class="validation">
-      <small *ngIf="formDelivery.controls['address'].errors?.required">Enter your address</small>      
+      <small *ngIf="formDelivery.controls['address'].errors?.required">Enter your address</small>
     </div>
   </div>
 
@@ -62,10 +62,10 @@
       <option value="Cash">Cash</option>
       <option value="Card">Card</option>
     </select>
-  </div>  
+  </div>
 
   <button type="submit" class="btn btn-primary btn-block"
-    [disabled]="formDelivery.invalid || submited"
+    [disabled]="formDelivery.invalid || submitted"
   >
     Place an order
 </button>

@@ -18,17 +18,17 @@ export class OrderService {
   createOrder = (order: Order): Observable<Order> => {
     return this.http.post<Order>(`${environment.fbDbUrl}/orders.json`, order)
     .pipe(
-      map( (res: FbResponse) =>{
+      map( (res: FbResponse) => {
         return {
           ...order,
           id: res.name,
           date: new Date(order.date)
-        }
+        };
       })
     );
   }
 
-  getAllOrder = ():Observable<Order[]> => {
+  getAllOrder = (): Observable<Order[]> => {
     return this.http.get(`${environment.fbDbUrl}/orders.json`)
       .pipe(
         map(res => {
@@ -38,15 +38,15 @@ export class OrderService {
               ...res[key],
               id: key,
               date: new Date(res[key].date)
-            }))
+            }));
           } else {
             return [];
-          }          
+          }
         }),
-      )
+      );
   }
 
-  deleteOrder = (id: string): Observable<void> => this.http.delete<void>(`${environment.fbDbUrl}/orders/${id}.json`)
+  deleteOrder = (id: string): Observable<void> => this.http.delete<void>(`${environment.fbDbUrl}/orders/${id}.json`);
 
   updateOrder = (order: Order): Observable<Order> => this.http.patch<Order>(`${environment.fbDbUrl}/orders/${order.id}.json`, order);
 }

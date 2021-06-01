@@ -4,9 +4,9 @@
   <h2 class="text-center">Orders products</h2>
 
   <div class="filter-control">
-    <button class="btn btn-primary" type="button" data-value="all" (click)="handlerButtonFilterOrder($event)">all</button>
-    <button class="btn btn-primary" type="button" data-value="active" (click)="handlerButtonFilterOrder($event)">active</button>
-    <button class="btn btn-primary" type="button" data-value="done" (click)="handlerButtonFilterOrder($event)">done</button>
+    <button class="btn btn-primary" [class.btn-danger]="isActive('all')" type="button" data-value="all" (click)="handlerButtonFilterOrder($event)">all</button>
+    <button class="btn btn-primary" [class.btn-danger]="isActive('active')" type="button" data-value="active" (click)="handlerButtonFilterOrder($event)">active</button>
+    <button class="btn btn-primary" [class.btn-danger]="isActive('done')" type="button" data-value="done" (click)="handlerButtonFilterOrder($event)">done</button>
   </div>
 
   <table>
@@ -32,9 +32,9 @@
         <td>{{order.totalPrice}}$</td>
         <td>
         <button class="btn btn-success"
-          (click)='complitedOrder($event, order)'
+          (click)='completedOrder($event, order)'
           [disabled]='order.done'
-          >Complited</button>
+          >Completed</button>
       </td>
       <td>
         <button class="btn btn-danger"
@@ -53,4 +53,4 @@
 <ng-template #empty>
   <div class="text-center">Note items...</div>
 </ng-template>
-<!-- *ngIf="loading; else loading" -->
+

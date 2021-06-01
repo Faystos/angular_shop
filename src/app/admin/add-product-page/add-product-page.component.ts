@@ -10,7 +10,7 @@ import { Product } from 'src/app/shared/interface';
 })
 export class AddProductPageComponent implements OnInit {
   form: FormGroup;
-  submited: boolean = false;
+  submitted = false;
 
   constructor(
     private productService: ProductService,
@@ -27,7 +27,9 @@ export class AddProductPageComponent implements OnInit {
   }
 
   submit = (): void => {
-    if(this.form.invalid) return;
+    if (this.form.invalid) {
+      return;
+    }
 
     const product: Product = {
       type: this.form.value.type,
@@ -37,11 +39,7 @@ export class AddProductPageComponent implements OnInit {
       price: this.form.value.price,
       date: new Date()
     };
-    
+
     this.productService.createProduct(product).subscribe(res => console.log(res));
-
-    
-    
   }
-
 }

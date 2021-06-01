@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/shared/auth.service';
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.scss']
 })
-export class AdminLayoutComponent implements OnInit {  
+export class AdminLayoutComponent implements OnInit {
   isAuth: boolean;
 
   constructor(

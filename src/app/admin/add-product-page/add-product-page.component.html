@@ -1,8 +1,7 @@
-<form 
+<form
   [formGroup]="form"
   (ngSubmit)="submit()"
 >
-
   <h2>Add product</h2>
 
   <div class="form-control">
@@ -11,41 +10,38 @@
       <option value="Phone">Phone</option>
       <option value="Tablet">Tablet</option>
       <option value="Laptop">Laptop</option>
-    </select>    
+    </select>
   </div>
 
   <div class="form-control">
     <label for="title">Name:</label>
-    <input type="title" formControlName='title' id="title">
+    <input type="text" formControlName='title' id="title">
     <div *ngIf="form.controls['title'].touched && form.controls['title'].invalid" class="validation">
-      <small *ngIf="form.controls['title'].errors?.required">Chose prodect name</small>      
+      <small *ngIf="form.controls['title'].errors?.required">Chose protect name</small>
     </div>
   </div>
 
   <div class="form-control">
-    <label for="photo">Photo:</label>
-    <quill-editor formControlName="photo"></quill-editor>    
+    <label>Photo:</label>
+    <quill-editor formControlName="photo"></quill-editor>
   </div>
 
   <div class="form-control">
-    <label for="info">Information:</label>
-    <quill-editor formControlName="info"></quill-editor>    
+    <label>Information:</label>
+    <quill-editor formControlName="info"></quill-editor>
   </div>
 
   <div class="form-control">
     <label for="price">Price:</label>
-    <input type="price" formControlName='price' id="price">
+    <input type="number" formControlName='price' id="price">
     <div *ngIf="form.controls['price'].touched && form.controls['price'].invalid" class="validation">
-      <small *ngIf="form.controls['price'].errors?.required">Chose prodect price</small>      
+      <small *ngIf="form.controls['price'].errors?.required">Chose protect price</small>
     </div>
   </div>
 
-  
-
   <button type="submit" class="btn btn-primary btn-block"
-    [disabled]="form.invalid || submited"
+    [disabled]="form.invalid || submitted"
   >
     Add
-</button>
-
+  </button>
 </form>

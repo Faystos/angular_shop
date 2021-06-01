@@ -18,7 +18,7 @@ import {SortingPipe} from './sorting.pipe';
     ReactiveFormsModule,
     QuillModule
   ],
-  exports:[
+  exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

@@ -1,21 +1,21 @@
 <nav class="navbar bg-dark">
   <h2>NG Shop</h2>
   <ul>
-    <li routerLinkActive="active">
-      <a (click)="setType($event, 'Phone')">Phone</a>
+    <li>
+      <a [class.active]="isActive('Phone')" (click)="setType($event, 'Phone')">Phone</a>
     </li>
 
-    <li routerLinkActive="active">
-      <a (click)="setType($event, 'Tablet')">Tablet</a>
+    <li>
+      <a [class.active]="isActive('Tablet')" (click)="setType($event, 'Tablet')">Tablet</a>
     </li>
 
-    <li routerLinkActive="active">
-      <a (click)="setType($event, 'Laptop')">Laptop</a>
+    <li>
+      <a [class.active]="isActive('Laptop')" (click)="setType($event, 'Laptop')">Laptop</a>
     </li>
 
-    <li routerLinkActive="active">
-      <a [routerLink]="['/cart']">Cart</a>
-    </li>   
+    <li>
+      <a [class.active]="isActive('Cart')" [routerLink]="['/cart']"   (click)="setActive('Cart')">Cart</a>
+    </li>
   </ul>
 </nav>
 

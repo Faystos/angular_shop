@@ -8,6 +8,7 @@ import { Product } from '../shared/interface';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
+
 export class ProductComponent implements OnInit {
   @Input() products: Product[];
 
@@ -18,8 +19,7 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
   }
 
-  addProduct = (product: Product):void => {
-    this.productServise.addCartProduct(product);  
+  addProduct = (product: Product): void => {
+    this.productServise.addCartProduct(product);
   }
-
 }

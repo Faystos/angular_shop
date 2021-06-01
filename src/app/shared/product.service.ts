@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  type: string = 'Phone';
+  type = 'Phone';
   cartProducts: Product[] = JSON.parse(localStorage.getItem('cart-product')) || [];
 
   constructor(
@@ -24,14 +24,14 @@ export class ProductService {
           ...product,
           id: res.name,
           date: new Date(product.date)
-        }
+        };
       })
-    );
+    )
 
   getAllProduct = (): Observable<Product[]> => {
     return this.http.get<Product[]>(`${environment.fbDbUrl}/products.json`).pipe(
       map( res => {
-        if(res !== null) {
+        if (res !== null) {
           return Object.keys(res)
           .map(key => ({
             ...res[key],
@@ -40,7 +40,7 @@ export class ProductService {
           }));
         } else {
           return [];
-        }          
+        }
       })
     );
   }
@@ -51,28 +51,30 @@ export class ProductService {
         return {
           ...product, id,
           date: new Date(product.date)
-        }
+        };
       }
     ));
   }
 
   removeProduct = (id: string): Observable<void> => this.http.delete<void>(`${environment.fbDbUrl}/products/${id}.json`);
 
-  updateProduct = (product: Product): Observable<Product> => this.http.patch<Product>(`${environment.fbDbUrl}/products/${product.id}.json`, product);
+  updateProduct = (product: Product): Observable<Product> => {
+    return this.http.patch<Product>(`${environment.fbDbUrl}/products/${product.id}.json`, product);
+  }
 
   setType = (type: string): void => {
     this.type = type;
   }
-  
+
   addCartProduct = (product: Product): void => {
     const newCartProducts: Product[] = [product, ...this.cartProducts];
     this.cartProducts = newCartProducts;
     localStorage.setItem('cart-product', JSON.stringify(this.cartProducts));
   }
 
-  deleteCartProduct = (idProduct: string):void => {
+  deleteCartProduct = (idProduct: string): void => {
     const newCartProducts: Product[] = this.cartProducts.filter(({id}) => id !== idProduct);
     this.cartProducts = newCartProducts;
-    localStorage.setItem('cart-product', JSON.stringify(this.cartProducts));    
+    localStorage.setItem('cart-product', JSON.stringify(this.cartProducts));
   }
 }

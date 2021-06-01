@@ -1,4 +1,4 @@
-<form 
+<form
   [formGroup]="form"
   (ngSubmit)="submit()"
 >
@@ -27,7 +27,7 @@
   </div>
 
   <button type="submit" class="btn btn-primary btn-block"
-    [disabled]="form.invalid || submited"
+    [disabled]="form.invalid || submitted"
   >
     Logon
 </button>

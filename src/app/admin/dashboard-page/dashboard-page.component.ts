@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { Product } from './../../shared/interface';
-import { ProductService } from './../../shared/product.service';
+import { Product } from '../../shared/interface';
+import { ProductService } from '../../shared/product.service';
 
 
 
@@ -26,15 +26,18 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy = (): void => {
-    if (this.pSub) this.pSub.unsubscribe();
-    if (this.dSub) this.dSub.unsubscribe();
-  } 
+    if (this.pSub) {
+      this.pSub.unsubscribe();
+    }
+    if (this.dSub) {
+      this.dSub.unsubscribe();
+    }
+  }
 
-  remove = (evt: Event, id:string): void => {
+  remove = (evt: Event, id: string): void => {
     evt.preventDefault();
-    this.dSub = this.productServise.removeProduct(id).subscribe(()=> {
+    this.dSub = this.productServise.removeProduct(id).subscribe(() => {
       this.products = this.products.filter(product => product.id !== id);
     });
   }
-
 }

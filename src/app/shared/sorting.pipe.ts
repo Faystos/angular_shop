@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class SortingPipe implements PipeTransform {
-  transform <Obj extends {[key: string]: string}>(arr: Obj[], type: string, keySort: string): Obj[] {
+  transform <Obj extends {[key: string]: any}>(arr: Obj[], type: string, keySort: string): Obj[] {
     if (type === 'all') {
       return arr;
     }

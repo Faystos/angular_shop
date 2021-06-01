@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 export class EditPageComponent implements OnInit, OnDestroy {
   editForm: FormGroup;
   product: Product;
-  submited: boolean = false;
+  submitted = false;
   uSub: Subscription;
 
   constructor(
@@ -23,11 +23,11 @@ export class EditPageComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
-  ngOnInit():void {    
+  ngOnInit(): void {
     this.route.params.pipe(
-      switchMap(params => this.productService.getProduct(params['id']))
+      switchMap(params => this.productService.getProduct(params.id))
     ).subscribe((product: Product) => {
-      this.product = product;      
+      this.product = product;
       this.editForm = new FormGroup({
         type: new FormControl(this.product.type, Validators.required),
         title: new FormControl(this.product.title, Validators.required),
@@ -38,14 +38,18 @@ export class EditPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy():void {
-    if (this.uSub) this.uSub.unsubscribe();
+  ngOnDestroy(): void {
+    if (this.uSub) {
+      this.uSub.unsubscribe();
+    }
   }
 
-  submit = (evt: Event):void => {
+  submit = (evt: Event): void => {
     evt.preventDefault();
-    if (this.editForm.invalid) return;
-    this.submited = true;
+    if (this.editForm.invalid) {
+      return;
+    }
+    this.submitted = true;
     this.uSub = this.productService.updateProduct({
       ...this.product,
       type: this.editForm.value.type,
@@ -54,7 +58,7 @@ export class EditPageComponent implements OnInit, OnDestroy {
       info: this.editForm.value.info,
       price: this.editForm.value.price,
     }).subscribe(() => {
-      this.submited = false;
+      this.submitted = false;
       this.router.navigate(['/admin', 'dashboard']);
     });
   }
