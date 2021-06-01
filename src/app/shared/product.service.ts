@@ -77,4 +77,10 @@ export class ProductService {
     this.cartProducts = newCartProducts;
     localStorage.setItem('cart-product', JSON.stringify(this.cartProducts));
   }
+
+  clearCartProduct = (): void => {
+    const newCartProducts: Product[] = [];
+    this.cartProducts = newCartProducts;
+    localStorage.clear();
+  }
 }

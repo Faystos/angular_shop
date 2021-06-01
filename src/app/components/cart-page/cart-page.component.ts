@@ -67,10 +67,11 @@ export class CartPageComponent implements OnInit {
     };
 
     this.orderService.createOrder(order).subscribe(() => {
-      this.formDelivery.reset();
       this.submitted = false;
-      this.cartProducts = [];
-      localStorage.setItem('cart-product', JSON.stringify(this.cartProducts));
     });
+
+    this.cartProducts = [];
+    this.formDelivery.reset();
+    this.productService.clearCartProduct();
   }
 }

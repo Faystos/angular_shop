@@ -18,10 +18,8 @@ export class MainLayoutComponent implements OnInit {
     private productService: ProductService,
   ) { }
 
-  ngOnInit() {
-    if (this.router.url.slice(1) === 'cart') {
-      this.activeButton = 'Cart';
-    }
+  ngOnInit(): void {
+    this.cartDetect();
   }
 
   setType = (evt: Event, type: string) => {
@@ -47,5 +45,11 @@ export class MainLayoutComponent implements OnInit {
   setActive = (type: string): void => {
     this.activeButton = type;
     this.isActive(this.activeButton);
+  }
+
+  cartDetect = (): void => {
+    if (this.router.url.slice(1) === 'cart') {
+      this.activeButton = 'Cart';
+    }
   }
 }
