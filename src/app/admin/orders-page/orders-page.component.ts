@@ -15,7 +15,7 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
   rSub: Subscription;
   uSub: Subscription;
   loading = false;
-  filterTextOrders: boolean | string = 'all';
+  filterTextOrders: string | boolean = 'all';
   activeButton = 'all';
 
   constructor(
