@@ -1,3 +1,4 @@
+import { ToggleActiveDirective } from './../shared/directives/toggleActive.directive';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -20,6 +21,7 @@ import { SharedModule } from '../shared/shared.module';
     EditPageComponent,
     OrdersPageComponent,
     SearchPipe,
+    ToggleActiveDirective
   ],
   imports: [
     SharedModule,

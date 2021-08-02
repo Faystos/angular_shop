@@ -3,10 +3,10 @@
 >
   <h2 class="text-center">Orders products</h2>
 
-  <div class="filter-control">
-    <button class="btn btn-primary" [class.btn-danger]="isActive('all')" type="button" data-value="all" (click)="handlerButtonFilterOrder($event)">all</button>
-    <button class="btn btn-primary" [class.btn-danger]="isActive('active')" type="button" data-value="active" (click)="handlerButtonFilterOrder($event)">active</button>
-    <button class="btn btn-primary" [class.btn-danger]="isActive('done')" type="button" data-value="done" (click)="handlerButtonFilterOrder($event)">done</button>
+  <div class="filter-control" toggleActive activeClass="btn-danger">
+    <button class="btn btn-primary btn-danger"  type="button" data-value="all" (click)="handlerButtonFilterOrder($event)">all</button>
+    <button class="btn btn-primary"  type="button" data-value="active" (click)="handlerButtonFilterOrder($event)">active</button>
+    <button class="btn btn-primary"  type="button" data-value="done" (click)="handlerButtonFilterOrder($event)">done</button>
   </div>
 
   <table>

@@ -25,7 +25,6 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.oSub = this.orderService.getAllOrder().subscribe(resOrders => {
       this.orders = resOrders;
-      this.isActive(this.activeButton);
       this.loading = true;
     });
   }
@@ -82,6 +81,4 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
       this.filterTextOrders = currentFilter;
     }
   }
-
-  isActive = (buttonName: string): boolean => this.activeButton === buttonName;
 }
